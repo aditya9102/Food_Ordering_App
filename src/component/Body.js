@@ -1,11 +1,24 @@
 import RestaurantCard from "./RestaurantCard";
-import { useState } from "react";
-import resList from "../utils/mockdata";
+import { useEffect, useState } from "react";
+import resList from "../utils/mockData";
 
 const Body = () => {
   //  Local State Variable - Super Powerful Variable
+  const [listOfRestaurants, setlistOfRestaurants] = useState(resList);
 
-  const [listOfRestaurants, setlistofRestaurants] = useState(resList);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.619974&lng=73.911863&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await data.json();
+
+    console.log(json);
+    setlistOfRestaurants(json.data.cards);
+  };
 
   return (
     <div className="body">
@@ -17,7 +30,7 @@ const Body = () => {
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRating > 4
             );
-            setlistofRestaurants(filteredList);
+            setlistOfRestaurants(filteredList);
           }}
         >
           Top Rated Restaurants
