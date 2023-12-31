@@ -20,8 +20,6 @@
 - Tree Shaking - remove unused code
 - Differnt development and production bundles
 
-
-
 Two types of Export/Import
 
 - Default Export/Import
@@ -34,7 +32,14 @@ import Componet from "path";
 export const Component;
 import {Component} from "path";
 
-# React Hooks 
+# React Hooks
+
 (Normal JavaScript Functions)
+
 - useState() - Superpowerful State Variables in react
-- useEffect() 
+- useEffect()
+
+# Two Types of Routing in web apps
+
+- Client side Routing
+- Server side Routing
