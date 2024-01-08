@@ -1,21 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Shimmer from "./shimmer";
+import { useParams } from "react-router-dom";
+import { MENU_API } from "../utils/constants";
+
+// import useRestaurantMenu from "../utils/useRestaurantMenu";
+
 const RestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
 
+  const { resId } = useParams();
+
   useEffect(() => {
     fetchMenu();
-  }, []);
+  });
 
   const fetchMenu = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/search/v3?lat=18.619974&lng=73.911863&str=McDonald%27s&trackingId=3f1d6240-ad7b-0fb9-d18a-ddfbd00ef0f8&submitAction=ENTER&queryUniqueId=44c2ed4f-4a24-0c08-84c0-11a3622eed6e"
-    );
+    const data = await fetch(MENU_API + resId);
     const json = await data.json();
-
-    console.log(json);
     setResInfo(json.data);
   };
+
+  // const resInfo = useRestaurantMenu(resId);
 
   if (resInfo === null) return <Shimmer />;
 
@@ -29,11 +34,14 @@ const RestaurantMenu = () => {
 
   return (
     <div>
-      <h1>{name}</h1>
-      <h3>{cuisines.join(", ")}</h3>
-      <p>{costForTwoMessage}</p>
-      <p>{deliveryTime} minutes</p>
+      <div>
+        <h1>{name}</h1>
+        <h3>{cuisines.join(", ")}</h3>
+        <p>{costForTwoMessage}</p>
+        <p>{deliveryTime} minutes</p>
+      </div>
     </div>
   );
 };
+
 export default RestaurantMenu;
