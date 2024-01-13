@@ -10,11 +10,11 @@ class UserClass extends React.Component {
         following: "Default",
       },
     };
-    console.log(this.props.name + "Child Contructor");
+    // console.log(this.props.name + "Child Contructor");
   }
 
   async componentDidMount() {
-    console.log(this.props.name + "Child CompnentDidMount");
+    // console.log(this.props.name + "Child CompnentDidMount");
     // API call
     const data = await fetch("https://api.github.com/users/aditya9102");
     const json = await data.json();
@@ -22,18 +22,18 @@ class UserClass extends React.Component {
     this.setState({
       userInfo: json,
     });
-    console.log(json);
+    // console.log(json);
   }
 
   componentDidUpdate() {
-    console.log("component Did Update");
+    // console.log("component Did Update");
   }
   componentWillUnmount() {
-    console.log("component will unmount");
+    // console.log("component will unmount");
   }
 
   render() {
-    console.log(this.props.name + "Child Render");
+    // console.log(this.props.name + "Child Render");
 
     const { name, following, avatar_url } = this.state.userInfo;
 
